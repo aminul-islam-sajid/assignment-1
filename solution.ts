@@ -26,17 +26,36 @@ class Person {
   }
 }
 
-
-
 const filterByRating = (books: { title: string; rating: number }[]) => {
   const filter = 4;
   return books.filter((book) => book.rating >= filter);
 };
 
-const books = [
-  { title: "Book A", rating: 4.5 },
-  { title: "Book B", rating: 3.2 },
-  { title: "Book C", rating: 5.0 },
-];
+type Book = {
+  title: string;
+  author: string;
+  publishedYear: number;
+  isAvailable: boolean;
+};
+const printBookDetails = (book: Book) => {
+  const { title, author, publishedYear, isAvailable } = book;
 
-console.log(filterByRating(books));
+  if (book) {
+    return `Title: ${title}, Author: ${author}, PublishedYear: ${publishedYear}, Available:${
+      isAvailable ? "Yes" : "No"
+    }`;
+  } else {
+    return "no Book Found";
+  }
+};
+
+const getUniqueValues = (array1: number[], array2: number[]) => {
+  const array1array2 = [...array1, ...array2];
+  const unicNumber = Array.from(new Set(array1array2));
+
+  return unicNumber.sort((a, b) => a - b);
+};
+
+const array1 = [1, 2, 3, 4, 5];
+const array2 = [3, 4, 5, 6, 7];
+console.log(getUniqueValues(array1, array2));
