@@ -31,6 +31,17 @@ const filterByRating = (books: { title: string; rating: number }[]) => {
   return books.filter((book) => book.rating >= filter);
 };
 
+type User = {
+  id: number;
+  name: string;
+  email: string | number;
+  isActive: boolean;
+};
+const filterActiveUsers = (users: User[]) => {
+  const activeUser = users.filter((user) => user.isActive === true);
+  return activeUser;
+};
+
 type Book = {
   title: string;
   author: string;
@@ -56,6 +67,21 @@ const getUniqueValues = (array1: number[], array2: number[]) => {
   return unicNumber.sort((a, b) => a - b);
 };
 
-const array1 = [1, 2, 3, 4, 5];
-const array2 = [3, 4, 5, 6, 7];
-console.log(getUniqueValues(array1, array2));
+type product = {
+  name: string;
+  price: number;
+  quantity: number;
+  discount?: number;
+};
+const calculateTotalPrice = (products: product[]) => {
+  const totalProduct = products.map((product) => {
+    let price = product.price;
+    if (product.discount) {
+      const diccountPrice = (product.price * product.discount) / 100;
+      price = product.price - diccountPrice;
+    }
+    return price * product.quantity;
+  });
+
+  return totalProduct.reduce((total, value) => total + value);
+};
